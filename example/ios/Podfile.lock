@@ -11,7 +11,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_traceroute (from `.symlinks/plugins/flutter_traceroute/ios`)
   - SimplePing (from `https://github.com/youssef-fk/SimplePing.git`)
-  - SimpleTracer (from `https://github.com/youssef-fk/SimpleTracer.git`)
+  - SimpleTracer (from `https://github.com/CoderJava/SimpleTracer.git`)
 
 EXTERNAL SOURCES:
   Flutter:
@@ -21,22 +21,22 @@ EXTERNAL SOURCES:
   SimplePing:
     :git: https://github.com/youssef-fk/SimplePing.git
   SimpleTracer:
-    :git: https://github.com/youssef-fk/SimpleTracer.git
+    :git: https://github.com/CoderJava/SimpleTracer.git
 
 CHECKOUT OPTIONS:
   SimplePing:
-    :commit: 5d8706ab38bdc31f774399cd474b2ebd04a44641
+    :commit: 2ad87bf9b8c145269ee6360ea1132520fbc9ea68
     :git: https://github.com/youssef-fk/SimplePing.git
   SimpleTracer:
-    :commit: 769aec762882c92f01317a565a263fd99bd448e2
-    :git: https://github.com/youssef-fk/SimpleTracer.git
+    :commit: 9e5fed456057c8c977703c1c25fc427cd2a199b8
+    :git: https://github.com/CoderJava/SimpleTracer.git
 
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_traceroute: ce0a0542f93c27751d053e7769644a9fb2b0c46a
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_traceroute: 96e117db703e503aafb1993a8028dee44a56822b
   SimplePing: dbf76d173000aa470f40ea6a0ddbd09778617b07
-  SimpleTracer: fc6d2e75e7a1bcde1600bfcf130a43660bc16826
+  SimpleTracer: aa952c338ad2e04edfc5f41fd61a0ca1e39bdfe1
 
-PODFILE CHECKSUM: 835b1b1eedbceb398be7ef3fb2b00e9df32c788b
+PODFILE CHECKSUM: c9e063e54007a98d2f7ee451dd33e085e0a4fe78
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.16.2
