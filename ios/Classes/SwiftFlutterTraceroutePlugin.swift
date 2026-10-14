@@ -4,7 +4,11 @@ import SimpleTracer
 
 public class SwiftFlutterTraceroutePlugin: NSObject, FlutterPlugin {
     
-    private static var traceEventHandler: EventChannelHandler?
+    // Per-instance (not static): a host app can register this plugin on more than one
+    // FlutterEngine (e.g. flutter_foreground_task's background engine). A static handler
+    // would be overwritten by the last registration and events would be sent to the wrong
+    // (or dead) messenger.
+    private var traceEventHandler: EventChannelHandler?
     private var  simpleTracer: SimpleTracer?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
@@ -12,7 +16,7 @@ public class SwiftFlutterTraceroutePlugin: NSObject, FlutterPlugin {
         let instance = SwiftFlutterTraceroutePlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
         
-        traceEventHandler = EventChannelHandler(
+        instance.traceEventHandler = EventChannelHandler(
             id: "flutter_event_trace",
             messenger: registrar.messenger()
         )
@@ -20,9 +24,9 @@ public class SwiftFlutterTraceroutePlugin: NSObject, FlutterPlugin {
     
     public func handleTrace(host: String,  ttl: Int) {
         simpleTracer?.stop()
-        simpleTracer = SimpleTracer.trace(host: host, maxTraceTTL: ttl) {  (result) in
+        simpleTracer = SimpleTracer.trace(host: host, maxTraceTTL: ttl) { [weak self] (result) in
             let data = TraceHelper.formatTraceStep(step: result)
-            SwiftFlutterTraceroutePlugin.traceEventHandler?.send(event: data)
+            self?.traceEventHandler?.send(event: data)
         }
     }
     
@@ -40,9 +44,11 @@ public class SwiftFlutterTraceroutePlugin: NSObject, FlutterPlugin {
             let ttl = args["ttl"] as! Int
             
             handleTrace(host: host, ttl: ttl)
+            result(nil)
             break;
         case "stop_trace":
             stopTrace()
+            result(nil)
             break;
         default:
             result("iOS " + UIDevice.current.systemVersion)
